@@ -1,0 +1,110 @@
+ import React, { useState } from 'react';
+import { Search, PawPrint, MapPin, Calendar, Heart, DollarSign, Shield } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+const PetSittingPlatform = () => {
+  const [city, setCity] = useState('');
+  const [dateRange, setDateRange] = useState('');
+
+  const cities = [
+    { name: 'New York', availableHosts: 142 },
+    { name: 'Los Angeles', availableHosts: 98 },
+    { name: 'Chicago', availableHosts: 76 },
+    { name: 'San Francisco', availableHosts: 85 }
+  ];
+
+  const features = [
+    { icon: Shield, title: 'Verified Hosts', description: 'All hosts are thoroughly verified' },
+    { icon: Heart, title: 'Pet Lovers Only', description: 'Connect with genuine animal enthusiasts' },
+    { icon: DollarSign, title: 'No Hidden Fees', description: 'Just $3 to join our community' }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div className="bg-white">
+        <div className="container mx-auto px-4 py-16">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold mb-4">Find a Loving Home for Your Pet While You Travel</h1>
+            <p className="text-xl text-gray-600 mb-8">Connect with verified pet lovers in your destination city</p>
+            
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6">
+              <div className="flex flex-col gap-4 md:flex-row">
+                <div className="flex-1 relative">
+                  <MapPin className="absolute left-3 top-3 text-gray-400" size={20} />
+                  <input
+                    type="text"
+                    placeholder="Enter destination city"
+                    className="w-full pl-10 pr-4 py-2 border rounded-lg"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                  />
+                </div>
+                <div className="flex-1 relative">
+                  <Calendar className="absolute left-3 top-3 text-gray-400" size={20} />
+                  <input
+                    type="text"
+                    placeholder="When do you need care?"
+                    className="w-full pl-10 pr-4 py-2 border rounded-lg"
+                    value={dateRange}
+                    onChange={(e) => setDateRange(e.target.value)}
+                  />
+                </div>
+                <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Popular Cities */}
+      <div className="container mx-auto px-4 py-12">
+        <h2 className="text-2xl font-bold mb-6">Popular Cities</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {cities.map((city) => (
+            <Card key={city.name} className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <CardTitle>{city.name}</CardTitle>
+                <CardDescription>{city.availableHosts} available hosts</CardDescription>
+              </CardHeader>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Features */}
+      <div className="container mx-auto px-4 py-12">
+        <h2 className="text-2xl font-bold mb-6">Why Choose Us</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {features.map((feature) => (
+            <Card key={feature.title} className="text-center">
+              <CardContent className="pt-6">
+                <div className="mb-4 flex justify-center">
+                  <feature.icon size={32} className="text-blue-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="bg-blue-600 text-white">
+        <div className="container mx-auto px-4 py-16 text-center">
+          <h2 className="text-3xl font-bold mb-4">Ready to Join Our Community?</h2>
+          <p className="mb-8">Connect with pet lovers for just $3</p>
+          <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+            Get Started
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PetSittingPlatform;
